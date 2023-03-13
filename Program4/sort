@@ -1,0 +1,77 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+void BubbleSort(vector<int> &vec, int first, int last){
+    for(int i = first; i < last; i++){
+        for(int j = 0; j < last; j++){
+            if(vec[j] > vec[j + 1])
+            swap(vec[j], vec[j + 1]);
+        }
+    }
+}
+
+void InsertionSort(vector<int> &vec, int first, int last){
+    for(int i = first +  1, i <= last; i++){
+        int last = vec[i];
+        int j = i - 1;
+        while(j >= f && vec[j] > last){
+            vec[j + 1] = vec[j];
+            j = j -1;
+        }
+
+        vec[j + 1] = last;
+    }
+}
+
+void Merge(vector<int> &vec, int first, int middle, int last){
+    int *tempVec;
+    int size = last - first + 1;
+    tempVec = new int[size];
+    int first_1 = first;
+    int last_1 = middle;
+    int first_2 = middle + 1;
+    int last_2 = last;
+    int i = 0;
+    while((first_1 <= last_1) && (first_2 < last_2)){
+        if(vec[first_1] < vec[first_2]){
+            tempVec[i] = vec[first_1];
+            first_1++
+        } else {
+            tempVec[i] = vec[first_2];
+            first_2++;
+        }
+        i++;
+    }
+
+    while(first_1 <= last_1){
+        tempVec[i] = vec[first_1];
+        first_1++;
+        i++;
+    }
+
+    while(first_2 <= last_2){
+        tempVec[i] = vec[first_1];
+        first_2++;
+        i++;
+    }
+
+    for(i = 0; i < size; i++){
+        vec[first] = tempVec[i];
+        first++;
+    }
+
+    delete[] tempVec;
+
+}
+
+void MergeSort(vector<int> &vec, int first, int last){
+    if(first < last){
+        int middle = (first + last) / 2;
+        MergeSort(vec, first, i);
+        MergeSort(vec, middle + 1, last);
+        Merge(vec, first, middle , last);
+    }
+}
+
